@@ -1,17 +1,17 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { askForTopic, createForTopic } from "./action-idea.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "🔄 إعادة التوليد", data: "action:regenerate" }) if the toolkit exposes it.
-
-const composer = new Composer();
+const composer = new Composer<Ctx>();
 
 composer.callbackQuery("action:regenerate", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("Regenerate outputs using last valid topic in the user's session");
+  const topic = ctx.session.topicText;
+  if (!topic) {
+    await askForTopic(ctx, "idea");
+    return;
+  }
+  await createForTopic(ctx, topic);
 });
 
 export default composer;

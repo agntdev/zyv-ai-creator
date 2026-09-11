@@ -1,17 +1,15 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "ℹ️ عن البوت", data: "main:about" }) if the toolkit exposes it.
+const composer = new Composer<Ctx>();
 
-const composer = new Composer();
+export const ABOUT = "يساعدك ZYV AI Creator على صياغة فكرة وHook وتسلسل وعنوان ووصف وهاشتاقات لفيديوك القصير.\n\nاكتب موضوعاً واضحاً بعد اختيار أي خيار. المخرجات آلية، لذا راجعها وعدّلها قبل النشر.";
+const back = inlineKeyboard([[inlineButton("⬅️ القائمة الرئيسية", "menu:main")]]);
 
 composer.callbackQuery("main:about", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("Show short about/help text describing capabilities and disclaimer");
+  await ctx.editMessageText(ABOUT, { reply_markup: back });
 });
 
 export default composer;
