@@ -1,0 +1,20 @@
+[
+  {
+    "name": "🔄 إعادة التوليد",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Regenerate outputs using last valid topic in the user's session"
+            }
+          }
+        ],
+        "send": {
+          "callback": "action:regenerate"
+        }
+      }
+    ]
+  }
+]
