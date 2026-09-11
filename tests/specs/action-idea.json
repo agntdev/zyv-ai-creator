@@ -1,19 +1,45 @@
 [
   {
-    "name": "🎬 فكرة فيديو",
+    "name": "🎬 فكرة فيديو asks for a topic",
     "steps": [
       {
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Start flow to generate full content package (asks for topic)"
+              "text": "اكتب لي مجال الفيديو أو الموضوع.\nمثال: نصائح احتراف البناء في Fortnite"
             }
           }
         ],
         "send": {
           "callback": "action:idea"
         }
+      }
+    ]
+  },
+  {
+    "name": "short topic asks for clarification and blocks generation",
+    "steps": [
+      {
+        "send": { "callback": "action:idea" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "اكتب لي مجال الفيديو أو الموضوع.\nمثال: نصائح احتراف البناء في Fortnite" } }]
+      },
+      {
+        "send": { "text": "قصير" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "احتاج موضوعاً أوضح قليلاً. اكتب 3 كلمات على الأقل أو 10 أحرف، مثل: نصائح احتراف البناء في Fortnite." } }]
+      }
+    ]
+  },
+  {
+    "name": "valid topic without a key explains setup without crashing",
+    "steps": [
+      {
+        "send": { "callback": "action:idea" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "نصائح احتراف البناء في Fortnite" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "ميزة التوليد ليست مُعدّة بعد. جرّب لاحقاً أو ارجع للقائمة الرئيسية." } }]
       }
     ]
   }

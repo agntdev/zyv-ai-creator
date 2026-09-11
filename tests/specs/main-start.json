@@ -5,9 +5,9 @@
       {
         "expect": [
           {
-            "method": "sendMessage",
+            "method": "editMessageText",
             "payload": {
-              "text": "Go to the main action menu with content options"
+              "text": "اختر ما تريد تحضيره لفيديوك:"
             }
           }
         ],

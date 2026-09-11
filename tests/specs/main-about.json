@@ -5,9 +5,9 @@
       {
         "expect": [
           {
-            "method": "sendMessage",
+            "method": "editMessageText",
             "payload": {
-              "text": "Show short about/help text describing capabilities and disclaimer"
+              "text": "يساعدك ZYV AI Creator على صياغة فكرة وHook وتسلسل وعنوان ووصف وهاشتاقات لفيديوك القصير.\n\nاكتب موضوعاً واضحاً بعد اختيار أي خيار. المخرجات آلية، لذا راجعها وعدّلها قبل النشر."
             }
           }
         ],

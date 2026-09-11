@@ -1,17 +1,23 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "🚀 ابدأ", data: "main:start" }) if the toolkit exposes it.
+const composer = new Composer<Ctx>();
 
-const composer = new Composer();
+export const MAIN_MENU = inlineKeyboard([
+  [inlineButton("🎬 فكرة فيديو", "action:idea"), inlineButton("⚡ Hook قوي", "action:hook")],
+  [inlineButton("📝 كتابة سكربت", "action:script"), inlineButton("🏷️ عنوان ووصف", "action:title")],
+  [inlineButton("#️⃣ هاشتاقات", "action:hashtags"), inlineButton("🎮 أفكار Fortnite", "action:fortnite")],
+  [inlineButton("💡 أفكار محتوى", "action:content"), inlineButton("🔄 إعادة التوليد", "action:regenerate")],
+  [inlineButton("ℹ️ عن البوت", "main:about")],
+]);
+
+export const MAIN_MENU_TEXT = "اختر ما تريد تحضيره لفيديوك:";
 
 composer.callbackQuery("main:start", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("Go to the main action menu with content options");
+  ctx.session.step = undefined;
+  await ctx.editMessageText(MAIN_MENU_TEXT, { reply_markup: MAIN_MENU });
 });
 
 export default composer;

@@ -1,13 +1,13 @@
 [
   {
-    "name": "🔄 إعادة التوليد",
+    "name": "🔄 إعادة التوليد asks for a topic when the session is empty",
     "steps": [
       {
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Regenerate outputs using last valid topic in the user's session"
+              "text": "اكتب لي مجال الفيديو أو الموضوع.\nمثال: نصائح احتراف البناء في Fortnite"
             }
           }
         ],

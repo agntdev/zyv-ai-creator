@@ -1,6 +1,7 @@
 import { Composer } from "grammy";
 import type { Ctx } from "../bot.js";
 import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
+import { ABOUT } from "./main-about.js";
 
 // /help — plain-language explanation for non-technical users. This bot is
 // button-driven: tell the user to tap /start to open the menu rather than listing
@@ -8,14 +9,12 @@ import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
 // main menu (`menu:help`). Enhance the copy for your specific bot; keep it short.
 const composer = new Composer<Ctx>();
 
-const HELP =
-  "ℹ️ Tap /start to open the menu, then pick what you want from the buttons.\n\n" +
-  "Everything in this bot is reachable by tapping — you don't need to remember any commands.";
+const HELP = ABOUT;
 
-const backToMenu = inlineKeyboard([[inlineButton("⬅️ Back to menu", "menu:main")]]);
+const backToMenu = inlineKeyboard([[inlineButton("⬅️ القائمة الرئيسية", "menu:main")]]);
 
 composer.command("help", async (ctx) => {
-  await ctx.reply(HELP);
+  await ctx.reply(HELP, { reply_markup: backToMenu });
 });
 
 composer.callbackQuery("menu:help", async (ctx) => {
