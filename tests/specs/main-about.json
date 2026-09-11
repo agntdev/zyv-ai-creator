@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ℹ️ عن البوت",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Show short about/help text describing capabilities and disclaimer"
+            }
+          }
+        ],
+        "send": {
+          "callback": "main:about"
+        }
+      }
+    ]
+  }
+]
